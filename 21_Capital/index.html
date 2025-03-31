@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Bot</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .capital {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Election Bot</h2>
+        <label for="country">Select a Country:</label>
+        <select id="country" onchange="displayCapital()">
+            <option value="">--Select--</option>
+            <option value="Washington, D.C.">USA</option>
+            <option value="New Delhi">India</option>
+            <option value="London">United Kingdom</option>
+            <option value="Tokyo">Japan</option>
+            <option value="Paris">France</option>
+        </select>
+        <div id="capital" class="capital"></div>
+    </div>
+
+    <script>
+        function displayCapital() {
+            const capital = document.getElementById("country").value;
+            document.getElementById("capital").textContent = capital ? `Capital: ${capital}` : "";
+        }
+    </script>
+</body>
+</html>
