@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details from XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Book Details</h2>
+        <button class="btn" onclick="loadBooks()">Load Books</button>
+        <table id="bookTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Edition</th>
+                    <th>Price ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Book details will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function loadBooks() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "books.xml", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let xmlDoc = xhr.responseXML;
+                    let books = xmlDoc.getElementsByTagName("book");
+                    let tableBody = document.querySelector("#bookTable tbody");
+                    tableBody.innerHTML = ""; // Clear existing data
+
+                    for (let i = 0; i < books.length; i++) {
+                        let title = books[i].getElementsByTagName("title")[0].textContent;
+                        let author = books[i].getElementsByTagName("author")[0].textContent;
+                        let edition = books[i].getElementsByTagName("edition")[0].textContent;
+                        let price = books[i].getElementsByTagName("price")[0].textContent;
+
+                        let row = `<tr>
+                                    <td>${title}</td>
+                                    <td>${author}</td>
+                                    <td>${edition}</td>
+                                    <td>${price}</td>
+                                   </tr>`;
+                        tableBody.innerHTML += row;
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

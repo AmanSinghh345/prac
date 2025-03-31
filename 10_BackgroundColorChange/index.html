@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Background Color Change</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background-color 1s ease-in-out;
+        }
+        h1 {
+            color: white;
+            padding: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .start { background-color: #28a745; color: white; }
+        .stop { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Changing Background Color</h1>
+    <button class="btn start" onclick="startColorChange()">Start</button>
+    <button class="btn stop" onclick="stopColorChange()">Stop</button>
+
+    <script>
+        let interval;
+
+        function getRandomColor() {
+            let letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function startColorChange() {
+            if (!interval) {
+                interval = setInterval(() => {
+                    document.body.style.backgroundColor = getRandomColor();
+                }, 1000); // Changes color every second
+            }
+        }
+
+        function stopColorChange() {
+            clearInterval(interval);
+            interval = null;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    </style>
+</head>
+<body>
+    <h2>Calculation Result</h2>
+    <h3>Result: <span id="result"></span></h3>
+    <a href="index.html">Go Back</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const num1 = parseFloat(urlParams.get('num1'));
+        const num2 = parseFloat(urlParams.get('num2'));
+        const operator = urlParams.get('operator');
+        let result;
+
+        if (isNaN(num1) || isNaN(num2)) {
+            result = "Invalid input";
+        } else {
+            switch (operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num2 !== 0 ? num1 / num2 : 'Cannot divide by zero'; break;
+                case '%': result = num2 !== 0 ? num1 % num2 : 'Cannot divide by zero'; break;
+                default: result = "Invalid operator";
+            }
+        }
+
+        document.getElementById('result').innerText = result;
+    </script>
+</body>
+</html>

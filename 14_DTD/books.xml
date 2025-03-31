@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE library SYSTEM "books.dtd">
+<library>
+    <book>
+        <title>The Great Gatsby</title>
+        <author>F. Scott Fitzgerald</author>
+        <edition>3rd</edition>
+        <price>15.99</price>
+    </book>
+    <book>
+        <title>To Kill a Mockingbird</title>
+        <author>Harper Lee</author>
+        <edition>2nd</edition>
+        <price>12.50</price>
+    </book>
+    <book>
+        <title>1984</title>
+        <author>George Orwell</author>
+        <edition>1st</edition>
+        <price>10.99</price>
+    </book>
+</library>

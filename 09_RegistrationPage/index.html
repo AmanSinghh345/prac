@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 350px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -8px;
+            margin-bottom: 8px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value;
+            let nameRegex = /^[A-Za-z\s]{6,}$/; // Name should contain only alphabets and be at least 6 characters
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Basic email validation
+            let isValid = true;
+
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("passwordError").innerText = "";
+            document.getElementById("emailError").innerText = "";
+
+            if (!nameRegex.test(name)) {
+                document.getElementById("nameError").innerText = "Name must contain only letters and be at least 6 characters.";
+                isValid = false;
+            }
+
+            if (password.length < 6) {
+                document.getElementById("passwordError").innerText = "Password must be at least 6 characters.";
+                isValid = false;
+            }
+
+            if (!emailRegex.test(email)) {
+                document.getElementById("emailError").innerText = "Please enter a valid email address.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form onsubmit="return validateForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <div class="error" id="nameError"></div>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <div class="error" id="passwordError"></div>
+            
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email">
+            <div class="error" id="emailError"></div>
+            
+            <input type="submit" class="btn" value="Register">
+        </form>
+    </div>
+</body>
+</html>

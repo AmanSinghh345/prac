@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details from XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #bookDetails {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Find Book Details</h2>
+        <input type="text" id="bookTitle" placeholder="Enter Book Title">
+        <button class="btn" onclick="fetchBookDetails()">Get Details</button>
+        <p id="bookDetails"></p>
+    </div>
+
+    <script>
+        function fetchBookDetails() {
+            let bookTitle = document.getElementById("bookTitle").value.trim().toLowerCase();
+            if (bookTitle === "") {
+                document.getElementById("bookDetails").innerText = "Please enter a book title!";
+                return;
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "books.xml", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let xmlDoc = xhr.responseXML;
+                    let books = xmlDoc.getElementsByTagName("book");
+                    let found = false;
+
+                    for (let i = 0; i < books.length; i++) {
+                        let title = books[i].getElementsByTagName("title")[0].textContent;
+                        if (title.toLowerCase() === bookTitle) {
+                            let author = books[i].getElementsByTagName("author")[0].textContent;
+                            let edition = books[i].getElementsByTagName("edition")[0].textContent;
+                            let price = books[i].getElementsByTagName("price")[0].textContent;
+
+                            document.getElementById("bookDetails").innerText = 
+                                `Title: ${title}\nAuthor: ${author}\nEdition: ${edition}\nPrice: $${price}`;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        document.getElementById("bookDetails").innerText = "Book not found!";
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

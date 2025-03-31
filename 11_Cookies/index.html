@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies in JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .save { background-color: #007bff; color: white; }
+        .delete { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cookies in JavaScript</h2>
+        <input type="text" id="username" placeholder="Enter your name">
+        <button class="btn save" onclick="setCookie()">Save Name</button>
+        <button class="btn delete" onclick="deleteCookie()">Delete Cookie</button>
+        <p id="welcomeMessage"></p>
+    </div>
+
+    <script>
+        function setCookie() {
+            let name = document.getElementById("username").value;
+            if (name) {
+                document.cookie = `username=${name}; expires=${new Date(2030, 0, 1).toUTCString()}; path=/`;
+                alert("Cookie Saved!");
+                checkCookie();
+            } else {
+                alert("Please enter a name!");
+            }
+        }
+
+        function getCookie(name) {
+            let cookies = document.cookie.split('; ');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookiePair = cookies[i].split('=');
+                if (cookiePair[0] === name) {
+                    return cookiePair[1];
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            let user = getCookie("username");
+            if (user) {
+                document.getElementById("welcomeMessage").innerText = `Welcome back, ${user}!`;
+            } else {
+                document.getElementById("welcomeMessage").innerText = "";
+            }
+        }
+
+        function deleteCookie() {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            alert("Cookie Deleted!");
+            checkCookie();
+        }
+
+        // Check for existing cookie on page load
+        checkCookie();
+    </script>
+</body>
+</html>

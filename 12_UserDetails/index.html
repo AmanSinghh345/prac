@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch User Details from XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #userDetails {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Find User Details</h2>
+        <input type="number" id="userId" placeholder="Enter User ID (1-10)">
+        <button class="btn" onclick="fetchUserDetails()">Get Details</button>
+        <p id="userDetails"></p>
+    </div>
+
+    <script>
+        function fetchUserDetails() {
+            let userId = document.getElementById("userId").value;
+            if (userId < 1 || userId > 10) {
+                document.getElementById("userDetails").innerText = "Invalid User ID! Please enter a number between 1 and 10.";
+                return;
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "users.xml", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let xmlDoc = xhr.responseXML;
+                    let users = xmlDoc.getElementsByTagName("user");
+
+                    for (let i = 0; i < users.length; i++) {
+                        let id = users[i].getElementsByTagName("id")[0].textContent;
+                        if (id == userId) {
+                            let name = users[i].getElementsByTagName("name")[0].textContent;
+                            let email = users[i].getElementsByTagName("email")[0].textContent;
+                            let phone = users[i].getElementsByTagName("phone")[0].textContent;
+
+                            document.getElementById("userDetails").innerText = 
+                                `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
+                            return;
+                        }
+                    }
+                    document.getElementById("userDetails").innerText = "User not found!";
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

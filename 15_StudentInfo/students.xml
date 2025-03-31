@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="students.css"?>
+<students>
+    <student>
+        <roll_no>101</roll_no>
+        <name>Amit Sharma</name>
+        <college>ABC Engineering College</college>
+        <branch>Computer Science</branch>
+        <year_of_joining>2022</year_of_joining>
+        <email>amit.sharma@example.com</email>
+    </student>
+    <student>
+        <roll_no>102</roll_no>
+        <name>Priya Verma</name>
+        <college>ABC Engineering College</college>
+        <branch>Electronics</branch>
+        <year_of_joining>2021</year_of_joining>
+        <email>priya.verma@example.com</email>
+    </student>
+    <student>
+        <roll_no>103</roll_no>
+        <name>Rohit Mehta</name>
+        <college>ABC Engineering College</college>
+        <branch>Mechanical</branch>
+        <year_of_joining>2023</year_of_joining>
+        <email>rohit.mehta@example.com</email>
+    </student>
+    <student>
+        <roll_no>104</roll_no>
+        <name>Neha Gupta</name>
+        <college>ABC Engineering College</college>
+        <branch>Civil</branch>
+        <year_of_joining>2020</year_of_joining>
+        <email>neha.gupta@example.com</email>
+    </student>
+    <student>
+        <roll_no>105</roll_no>
+        <name>Vikram Singh</name>
+        <college>ABC Engineering College</college>
+        <branch>Information Technology</branch>
+        <year_of_joining>2022</year_of_joining>
+        <email>vikram.singh@example.com</email>
+    </student>
+</students>
